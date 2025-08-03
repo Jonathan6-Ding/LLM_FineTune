@@ -156,7 +156,7 @@ def train_function(model_args: ModelConfig, script_args: ScriptArguments, traini
     # Initialize the Trainer
     ########################
     def formatting_func(example):
-        return f"### Question:\n{example['question']}\n\n### Answer:\n{example['response']}"
+        return tokenizer.apply_chat_template(example["messages"], tokenize=False)
     trainer = SFTTrainer(
         model=model,
         args=training_args,
