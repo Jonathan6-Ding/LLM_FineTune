@@ -155,12 +155,15 @@ def train_function(model_args: ModelConfig, script_args: ScriptArguments, traini
     ########################
     # Initialize the Trainer
     ########################
+    def formatting_func(example):
+        return f"### Question:\n{example['question']}\n\n### Answer:\n{example['response']}"
     trainer = SFTTrainer(
         model=model,
         args=training_args,
         train_dataset=train_dataset,
         tokenizer=tokenizer,
         peft_config=peft_config,
+        formatting_func=formatting_func,  # 👈 this is key
     )
     if trainer.accelerator.is_main_process and peft_config:
         trainer.model.print_trainable_parameters()
