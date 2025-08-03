@@ -10,9 +10,10 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed, BitsAndBytesConfig
 from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import is_liger_kernel_available
-from trl import SFTTrainer, TrlParser, ModelConfig, SFTConfig, get_peft_config
+from trl import SFTTrainer, TrlParser, ModelConfig, get_peft_config
 from datasets import load_dataset
 from peft import AutoPeftModelForCausalLM
+from trl.trainer import SFTConfig
 
 if is_liger_kernel_available():
     from liger_kernel.transformers import AutoLigerKernelForCausalLM
